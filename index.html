@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171a1b">
+  <title>The Threshold — Arquivo de Personagens</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" data-page="intro"><span class="sigil">✧</span><span>The <b>Threshold</b></span></a>
+  <nav>
+    <button class="nav-btn active" data-page="intro">Sobre o mundo</button>
+    <button class="nav-btn" data-page="builder">Criar ficha</button>
+    <button class="nav-btn" data-page="archive">Arquivo de personagens</button>
+  </nav>
+</header>
+<main>
+  <section id="intro" class="page active">
+    <div class="hero">
+      <p class="eyebrow">UM RPG MEDIEVAL DE MISTÉRIO</p>
+      <h1>Algumas escolhas<br><em>não são feitas pela razão.</em></h1>
+      <p class="lead">Antes de atravessar o limiar, conheça o cenário e prepare seu personagem.</p>
+      <button class="primary" data-page="builder">Começar minha ficha <span>↗</span></button>
+    </div>
+    <div class="guide-grid">
+      <article class="guide-card"><span class="guide-icon">✦</span><h3>Atributos</h3><p>Distribua <b>10 pontos</b> entre os seis atributos. Eles representam os principais aspectos do personagem.</p><small>Físico · Mente · Emoção · Sorte · Conhecimento · Percepção</small></article>
+      <article class="guide-card"><span class="guide-icon">⚒</span><h3>Perícias</h3><p>Escolha as perícias que combinam com seu personagem. Elas indicam o que ele sabe fazer e podem ser usadas em testes durante a campanha.</p></article>
+      <article class="guide-card"><span class="guide-icon">♜</span><h3>Nível, origem e ocupação</h3><p>O nível representa seu desenvolvimento. A origem conta de onde veio; a ocupação descreve seu estilo ou papel.</p></article>
+      <article class="guide-card"><span class="guide-icon">♥</span><h3>Vida e determinação</h3><p><b>Vida:</b> resistência do personagem, limitada a 32.<br><b>Determinação:</b> força para continuar, limitada a 25.</p></article>
+      <article class="guide-card"><span class="guide-icon">⌂</span><h3>Seu vínculo com a vila</h3><p>Escolha se já vive na vila ou se está chegando recentemente. Quem já mora nela pode definir uma função comunitária.</p></article>
+      <article class="guide-card"><span class="guide-icon">☷</span><h3>Funções da vila</h3><p>Ajudante comunitário, ferreiro, curandeiro, caçador, guarda, agricultor, estalajadeiro, erudito, explorador ou uma função própria.</p></article>
+    </div>
+    <div class="notice"><b>Nota do mestre</b><p>Características sobrenaturais são opcionais. Mantenha a ficha coerente com o cenário e converse com o mestre se tiver dúvidas sobre uma habilidade ou equipamento.</p></div>
+  </section>
+
+  <section id="builder" class="page">
+    <div class="section-heading"><div><p class="eyebrow">REGISTRO DE PERSONAGEM</p><h1>Crie sua ficha</h1></div><button class="quiet" data-page="intro">← Voltar ao guia</button></div>
+    <div class="builder-layout">
+      <form id="characterForm">
+        <div class="form-section identity">
+          <div class="portrait-upload" id="portraitBox">
+            <img id="portraitPreview" alt="Retrato do personagem" hidden>
+            <div id="portraitPlaceholder"><span>＋</span><b>Adicionar retrato</b><small>Clique para escolher uma imagem</small></div>
+            <input type="file" id="portraitInput" accept="image/*" hidden>
+          </div>
+          <div class="identity-fields">
+            <label>Nome do personagem<input id="name" required placeholder="Nome completo"></label>
+            <label>Título <span class="optional">(opcional)</span><input id="title" placeholder="Ex.: O Vigilante"></label>
+            <label>Jogador(a)<input id="player" placeholder="Seu nome ou @"></label>
+            <div class="select-row">
+              <label>Nível<select id="level"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+              <label>Origem<select id="origin"><option value="">Escolha...</option><option>Arqueiro</option><option>Guardião</option><option>Acólito do Chamado</option><option>Caçador</option><option>Erudito</option><option>Curandeiro</option><option>Artesão</option><option>Viajante</option><option>Outra</option></select></label>
+            </div>
+            <label>Ocupação / estilo<select id="occupation"><option value="">Escolha...</option><option>Arqueiro — combate à distância</option><option>Guardião — defesa e proteção</option><option>Acólito do Chamado — vínculo com animais</option><option>Caçador — rastreio e sobrevivência</option><option>Ferreiro — criação e reparo</option><option>Curandeiro — cuidado e medicina</option><option>Erudito — estudo e conhecimento</option><option>Estilo próprio</option></select></label>
+            <p class="microcopy" id="occupationHint">Escolha uma ocupação para ver um breve resumo.</p>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title"><h2>Atributos</h2><span id="pointsStatus">10 pontos disponíveis</span></div>
+          <p class="helper">Distribua exatamente 10 pontos. Use − e + para ajustar. Os valores começam em 0.</p>
+          <div class="attributes" id="attributes"></div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title"><h2>Perícias</h2><span>Escolha as que combinam</span></div>
+          <p class="helper">As perícias representam conhecimentos e práticas do personagem.</p>
+          <div class="skills-grid" id="skills"></div>
+        </div>
+
+        <div class="form-section two-col">
+          <label>História e conceito<textarea id="history" rows="5" placeholder="Conte um pouco sobre origem, passado, personalidade e conceito do personagem..."></textarea></label>
+          <label>Equipamentos<textarea id="equipment" rows="5" placeholder="Armas, armadura, ferramentas e itens importantes..."></textarea></label>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title"><h2>Vida e determinação</h2><span>Limites da ficha</span></div>
+          <div class="meters">
+            <label>Vida <small>Máximo: 32</small><input type="number" id="health" min="0" max="32" value="32"></label>
+            <label>Determinação <small>Máximo: 25</small><input type="number" id="resolve" min="0" max="25" value="25"></label>
+          </div>
+        </div>
+
+        <div class="form-section two-col">
+          <label>Características especiais <span class="optional">(opcional)</span><textarea id="special" rows="3" placeholder="Habilidade, talento ou característica única."></textarea></label>
+          <label>Combate<textarea id="combat" rows="3" placeholder="Arma principal, arma secundária, estilo de combate..."></textarea></label>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title"><h2>Vínculo com a vila</h2><span>Escolha seu começo</span></div>
+          <div class="radio-cards">
+            <label><input type="radio" name="villageStatus" value="resident" checked><span><b>Já moro na vila</b><small>Nasci, cresci ou vivo aqui há algum tempo.</small></span></label>
+            <label><input type="radio" name="villageStatus" value="newcomer"><span><b>Estou chegando recentemente</b><small>Acabei de chegar e ainda conheço pouco o lugar.</small></span></label>
+          </div>
+          <div id="villageRoleWrap"><label>Função na vila<select id="villageRole"><option value="">Escolha uma função...</option><option>Ajudante comunitário</option><option>Ferreiro</option><option>Curandeiro</option><option>Caçador</option><option>Guarda</option><option>Agricultor</option><option>Estalajadeiro</option><option>Erudito</option><option>Explorador</option><option>Outra função</option></select></label><label id="customRoleWrap" hidden>Descreva sua função<input id="customRole" placeholder="Minha função na vila..."></label></div>
+          <label id="arrivalReasonWrap" hidden>Motivo da chegada<textarea id="arrivalReason" rows="2" placeholder="Por que seu personagem veio até a vila?"></textarea></label>
+        </div>
+        <div class="form-actions"><button type="reset" class="quiet">Limpar ficha</button><button type="submit" class="primary">Visualizar ficha final ↗</button></div>
+      </form>
+      <aside class="side-guide">
+        <p class="eyebrow">GUIA RÁPIDO</p><h2>Montando seu personagem</h2>
+        <div class="side-tip"><b>✦ Atributos</b><p>Você tem 10 pontos para distribuir entre seis atributos.</p></div>
+        <div class="side-tip"><b>⚒ Perícias</b><p>Marque as perícias que seu personagem domina ou deseja desenvolver.</p></div>
+        <div class="side-tip"><b>♜ Ocupação</b><p>Arqueiros atuam à distância; guardiões protegem; acólitos têm afinidade com animais. Você também pode criar um estilo próprio.</p></div>
+        <div class="side-tip"><b>⌂ Vila</b><p>Seu personagem pode já pertencer à comunidade ou começar como recém-chegado.</p></div>
+        <div class="notice compact"><b>Antes de publicar</b><p>Revise os dados e confirme com o mestre se sua ficha está de acordo com as regras da campanha.</p></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="preview" class="page">
+    <div class="section-heading"><div><p class="eyebrow">REGISTRO CONCLUÍDO</p><h1>Ficha do personagem</h1></div><button class="quiet" id="editCharacter">← Editar ficha</button></div>
+    <div class="sheet-wrap"><canvas id="sheetCanvas" width="1600" height="1000"></canvas></div>
+    <div class="form-actions centered"><button class="quiet" id="downloadPng">Baixar imagem PNG</button><button class="primary" id="publishCharacter">Salvar no arquivo de personagens ↗</button></div>
+  </section>
+
+  <section id="archive" class="page">
+    <div class="section-heading"><div><p class="eyebrow">REGISTROS DA COMUNIDADE</p><h1>Arquivo de personagens</h1><p class="lead small">Personagens salvos neste navegador.</p></div></div>
+    <div class="archive-tools"><input id="archiveSearch" placeholder="Buscar por personagem, jogador ou ocupação..."><button class="quiet" id="refreshArchive">Atualizar</button></div>
+    <div id="archiveGrid" class="archive-grid"></div>
+    <p class="helper" id="archiveNote">Este arquivo usa armazenamento local do navegador. Para compartilhar fichas entre todos os jogadores, será necessário conectar um banco de dados.</p>
+  </section>
+</main>
+<footer><span>✧ THE THRESHOLD</span><span>Algumas escolhas não são feitas pela razão.</span></footer>
+<script src="app.js"></script>
+</body>
+</html>
