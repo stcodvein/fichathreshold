@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE THRESHOLD - Ficha de RPG Medieval</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=MedievalSharp&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a0908;
+      --panel-bg: rgba(18, 15, 13, 0.90);
+      --panel-border: #4a3b2c;
+      --gold-accent: #c9a054;
+      --gold-light: #e6c88b;
+      --text-parchment: #d9c8b0;
+      --text-muted: #9e8e78;
+      --red-accent: #8b2626;
+      --shadow-color: rgba(0, 0, 0, 0.92);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(30, 22, 16, 0.65), rgba(5, 4, 4, 0.96)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>');
+      color: var(--text-parchment);
+      font-family: 'Crimson Text', serif;
+      font-size: 16px;
+      line-height: 1.4;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* HEADER */
+    header {
+      background: rgba(12, 10, 8, 0.96);
+      border-bottom: 2px solid var(--gold-accent);
+      box-shadow: 0 4px 20px var(--shadow-color);
+      padding: 12px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      font-size: 28px;
+      color: var(--gold-accent);
+      filter: drop-shadow(0 0 5px rgba(201, 160, 84, 0.5));
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: 2px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .nav-btn {
+      background: linear-gradient(180deg, #2a2118 0%, #15100b 100%);
+      border: 1px solid var(--gold-accent);
+      color: var(--gold-light);
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background: linear-gradient(180deg, #4a3725 0%, #2a1c10 100%);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(201, 160, 84, 0.4);
+      border-color: #fff;
+    }
+
+    .profile-icon {
+      font-size: 16px;
+      color: var(--gold-accent);
+      cursor: pointer;
+      border: 1px solid var(--panel-border);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.4);
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1400px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    /* MEDIEVAL PANEL STYLING */
+    .medieval-panel {
+      background: var(--panel-bg);
+      border: 2px solid var(--panel-border);
+      box-shadow: 0 8px 25px var(--shadow-color), inset 0 0 15px rgba(0,0,0,0.8);
+      position: relative;
+      padding: 16px;
+      margin-bottom: 20px;
+      border-radius: 2px;
+    }
+
+    .medieval-panel::before {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px; right: 3px; bottom: 3px;
+      border: 1px solid rgba(201, 160, 84, 0.2);
+      pointer-events: none;
+    }
+
+    .panel-title {
+      font-family: 'Cinzel', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-bottom: 1px solid var(--panel-border);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-title span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* INFO / HELP BUTTON */
+    .info-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(201, 160, 84, 0.15);
+      border: 1px solid var(--gold-accent);
+      color: var(--gold-accent);
+      font-size: 11px;
+      font-family: sans-serif;
+      cursor: pointer;
+      margin-left: 6px;
+      transition: all 0.2s;
+    }
+
+    .info-btn:hover {
+      background: var(--gold-accent);
+      color: #000;
+    }
+
+    /* GRID LAYOUTS */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr 300px;
+      gap: 20px;
+    }
+
+    @media (max-width: 1150px) {
+      .main-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .left-sidebar {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+      .left-sidebar {
+        grid-column: span 1;
+      }
+    }
+
+    /* LEFT SIDEBAR RECAP */
+    .welcome-panel {
+      font-size: 14.5px;
+      line-height: 1.5;
+    }
+
+    .welcome-panel h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-light);
+      margin-top: 14px;
+      margin-bottom: 4px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .welcome-panel p {
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-size: 13.5px;
+    }
+
+    /* PORTRAIT FRAME */
+    .portrait-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .portrait-frame {
+      width: 190px;
+      height: 240px;
+      border: 3px double var(--gold-accent);
+      background: rgba(0, 0, 0, 0.7);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+      margin-bottom: 10px;
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .portrait-placeholder {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 10px;
+    }
+
+    .portrait-placeholder i {
+      font-size: 38px;
+      margin-bottom: 6px;
+      color: var(--panel-border);
+    }
+
+    .portrait-controls {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* FORM ELEMENTS */
+    label {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 12.5px;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%;
+      background: rgba(10, 8, 7, 0.88);
+      border: 1px solid var(--panel-border);
+      color: var(--text-parchment);
+      padding: 8px 10px;
+      font-family: 'Crimson Text', serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      border-radius: 2px;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+      border-color: var(--gold-accent);
+      box-shadow: 0 0 6px rgba(201, 160, 84, 0.3);
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .inline-fields {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+    }
+
+    /* ATTRIBUTES */
+    .attribute-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .attribute-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0,0,0,0.45);
+      padding: 6px 10px;
+      border: 1px solid rgba(74, 59, 44, 0.6);
+      border-radius: 2px;
+    }
+
+    .attr-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+
+    .attr-icon {
+      width: 24px;
+      text-align: center;
+      color: var(--gold-accent);
+    }
+
+    .attr-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-counter {
+      width: 24px;
+      height: 24px;
+      background: var(--panel-border);
+      border: 1px solid var(--gold-accent);
+      color: var(--gold-light);
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      transition: background 0.15s;
+    }
+
+    .btn-counter:hover {
+      background: var(--gold-accent);
+      color: #000;
+    }
+
+    .attr-value {
+      width: 24px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    /* SKILLS */
+    .skills-counter {
+      font-size: 13px;
+      color: var(--gold-accent);
+      text-align: right;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-family: 'Cinzel', serif;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+    }
+
+    @media(max-width: 500px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14.5px;
+      background: rgba(0,0,0,0.25);
+      padding: 4px 8px;
+      border-radius: 2px;
+      border: 1px solid rgba(74, 59, 44, 0.3);
+    }
+
+    .skill-item input[type="checkbox"] {
+      accent-color: var(--gold-accent);
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+
+    .skill-item input[type="checkbox"]:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* SPECIAL ABILITIES CARDS */
+    .special-ability-card {
+      background: rgba(8, 6, 5, 0.7);
+      border: 1px solid var(--panel-border);
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 2px;
+    }
+
+    .ability-header {
+      display: grid;
+      grid-template-columns: 1fr 150px;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    @media(max-width: 550px) {
+      .ability-header {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+      background: linear-gradient(180deg, #8b2626 0%, #521515 100%);
+      border: 1px solid #d9534f;
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 12px 24px;
+      width: 100%;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+      transition: all 0.2s;
+      border-radius: 2px;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(180deg, #a83232 0%, #681b1b 100%);
+      box-shadow: 0 0 15px rgba(217, 83, 79, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(30, 25, 20, 0.85);
+      border: 1px solid var(--panel-border);
+      color: var(--text-parchment);
+      padding: 6px 12px;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold-accent);
+      color: var(--gold-light);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: var(--panel-bg);
+      border: 2px solid var(--gold-accent);
+      box-shadow: 0 0 35px rgba(0,0,0,0.95);
+      max-width: 540px;
+      width: 100%;
+      padding: 22px;
+      position: relative;
+      border-radius: 2px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px; right: 12px;
+      background: none;
+      border: none;
+      color: var(--gold-accent);
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    /* ARCHIVE SECTION */
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    .char-card {
+      background: rgba(14, 11, 9, 0.92);
+      border: 1px solid var(--panel-border);
+      padding: 14px;
+      display: flex;
+      gap: 12px;
+      position: relative;
+      border-radius: 2px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    }
+
+    .char-card-portrait {
+      width: 85px;
+      height: 105px;
+      border: 1px solid var(--gold-accent);
+      object-fit: cover;
+      background: #000;
+    }
+
+    .char-card-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .char-card-name {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-light);
+      font-weight: bold;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .char-card-details {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 4px 0 10px 0;
+      line-height: 1.3;
+    }
+
+    .char-card-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .char-card-actions button {
+      padding: 4px 8px;
+      font-size: 11px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER NAVIGATION -->
+  <header>
+    <div class="brand" onclick="switchTab('creator')">
+      <span class="brand-logo">✦</span>
+      <h1 class="brand-title">The Threshold</h1>
+    </div>
+    <nav>
+      <button class="nav-btn active" id="btn-tab-creator" onclick="switchTab('creator')">Criar Ficha</button>
+      <button class="nav-btn" id="btn-tab-archive" onclick="switchTab('archive')">Arquivo de Personagens</button>
+      <button class="nav-btn" onclick="openModal('Sobre o Mundo', 'The Threshold é um RPG medieval sombrio e misterioso onde a sobrevivência da vila depende da coragem de seus habitantes contra os perigos da noite e as incertezas além do limiar.')">Sobre o Mundo</button>
+      <div class="profile-icon" title="Perfil do Jogador">👤</div>
+    </nav>
+  </header>
+
+  <div class="container">
+    
+    <!-- VIEW: CREATOR -->
+    <div id="view-creator">
+      <div class="main-grid">
+
+        <!-- COLUMN 1: LEFT INSTRUCTIONS & SYSTEM RECAP -->
+        <div class="left-sidebar">
+          <div class="medieval-panel welcome-panel">
+            <h2 class="panel-title"><span>✦ Bem-vindo ao The Threshold</span></h2>
+            
+            <p>Antes de criar sua ficha, confira aqui as principais informações para montar seu personagem e entender o funcionamento do sistema:</p>
+
+            <h3>✦ Atributos</h3>
+            <p>Você tem 6 pontos para distribuir. Eles representam as principais habilidades do seu personagem.</p>
+
+            <h3>✦ Perícias</h3>
+            <p>Selecione exatamente <strong>5 perícias</strong> que combinam com seu personagem para testes durante a campanha.</p>
+
+            <h3>✦ Nível, Origem e Ocupação</h3>
+            <p>O nível indica sua experiência, a origem sua história e a ocupação sua forma de agir no mundo.</p>
+
+            <h3>✦ Vida e Determinação</h3>
+            <p>Vida representa sua resistência (máx. 32) e Determinação sua força de vontade (máx. 25).</p>
+
+            <h3>✦ Habilidades Especiais</h3>
+            <p>Registre até 5 habilidades. Ativas custam de 2 a 6 PD (custos ativos únicos). Passivas custam 0 PD.</p>
+
+            <div style="margin-top:20px; font-style:italic; text-align:center; color: var(--gold-accent); font-family: 'Crimson Text', serif;">
+              "Há sempre um lugar para quem luta."<br><small style="font-family: 'Cinzel', serif;">— The Threshold</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMN 2: CENTER MAIN CHARACTER FORM -->
+        <div class="center-content">
+          <form id="character-form" onsubmit="saveCharacter(event)">
+            
+            <!-- HEADER INFO & PORTRAIT -->
+            <div class="medieval-panel">
+              <h2 class="panel-title"><span>✦ Informações Principais</span></h2>
+              
+              <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                
+                <!-- PORTRAIT -->
+                <div class="portrait-box">
+                  <div class="portrait-frame" id="portrait-frame">
+                    <div class="portrait-placeholder" id="portrait-placeholder">
+                      <i>👤</i><br>
+                      <span>Sem Foto</span>
+                    </div>
+                    <img id="portrait-img" class="hidden" alt="Retrato do Personagem">
+                  </div>
+                  <div class="portrait-controls">
+                    <input type="file" id="portrait-input" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                    <button type="button" class="btn-secondary" onclick="document.getElementById('portrait-input').click()">Escolher Foto</button>
+                    <button type="button" class="btn-secondary" onclick="removeImage()">Remover</button>
+                  </div>
+                </div>
+
+                <!-- MAIN FIELDS -->
+                <div style="flex: 1; min-width: 250px;">
+                  <div class="form-group">
+                    <label for="char-name">Nome do Personagem: *</label>
+                    <input type="text" id="char-name" required placeholder="Ex: Eldrin Vance">
+                  </div>
+
+                  <div class="inline-fields">
+                    <div class="form-group">
+                      <label for="char-title">Título (Opcional):</label>
+                      <input type="text" id="char-title" placeholder="Ex: O Silencioso">
+                    </div>
+                    
+                    <!-- REQUISITO 1: CAMPO DE IDADE OBRIGATÓRIO -->
+                    <div class="form-group">
+                      <label for="char-age">Idade: * <span class="info-btn" onclick="openModal('Idade', 'Informe a idade atual do personagem em anos. Apenas números são permitidos.')">?</span></label>
+                      <input type="number" id="char-age" min="1" max="999" required placeholder="Ex: 28">
+                    </div>
+                  </div>
+
+                  <div class="inline-fields">
+                    <div class="form-group">
+                      <label for="player-name">Jogador(a): *</label>
+                      <input type="text" id="player-name" required placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="char-level">Nível:</label>
+                      <input type="number" id="char-level" value="1" min="1" max="20" required>
+                    </div>
+                  </div>
+
+                  <div class="inline-fields">
+                    <div class="form-group">
+                      <label for="char-origin">Origem:</label>
+                      <select id="char-origin">
+                        <option value="Vila das Sombras">Vila das Sombras</option>
+                        <option value="Fortaleza de Pedra">Fortaleza de Pedra</option>
+                        <option value="Florestas Antigas">Florestas Antigas</option>
+                        <option value="Terras Desoladas">Terras Desoladas</option>
+                        <option value="Reino Fronteiriço">Reino Fronteiriço</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="char-occupation">Ocupação:</label>
+                      <select id="char-occupation">
+                        <option value="Ajudante Comunitário">Ajudante Comunitário</option>
+                        <option value="Ferreiro">Ferreiro</option>
+                        <option value="Curandeiro">Curandeiro</option>
+                        <option value="Caçador">Caçador</option>
+                        <option value="Guarda">Guarda</option>
+                        <option value="Agricultor">Agricultor</option>
+                        <option value="Estalajadeiro">Estalajadeiro</option>
+                        <option value="Erudito">Erudito</option>
+                        <option value="Explorador">Explorador</option>
+                        <option value="Outra função">Outra função</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- ATTRIBUTES & SKILLS GRID -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              
+              <!-- ATTRIBUTES -->
+              <div class="medieval-panel">
+                <h2 class="panel-title">
+                  <span>✦ Atributos</span>
+                  <span style="font-size: 12px; color: var(--gold-accent); font-weight: normal;">Restantes: <span id="attr-points-left">6</span>/6</span>
+                </h2>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Distribua seus 6 pontos iniciais:</p>
+
+                <div class="attribute-list">
+                  <div class="attribute-row">
+                    <div class="attr-info">
+                      <span class="attr-icon">💪</span>
+                      <span>Físico</span>
+                      <span class="info-btn" onclick="openModal('Físico', 'Mede sua força bruta, resistência física e potência corporal.')">?</span>
+                    </div>
+                    <div class="attr-controls">
+                      <button type="button" class="btn-counter" onclick="changeAttr('fisico', -1)">-</button>
+                      <span class="attr-value" id="val-fisico">0</span>
+                      <button type="button" class="btn-counter" onclick="changeAttr('fisico', 1)">+</button>
+                    </div>
+                  </div>
+
+                  <div class="attribute-row">
+                    <div class="attr-info">
+                      <span class="attr-icon">🧠</span>
+                      <span>Mente</span>
+                      <span class="info-btn" onclick="openModal('Mente', 'Representa raciocínio lógico, foco mental e capacidade analítica.')">?</span>
+                    </div>
+                    <div class="attr-controls">
+                      <button type="button" class="btn-counter" onclick="changeAttr('mente', -1)">-</button>
+                      <span class="attr-value" id="val-mente">0</span>
+                      <button type="button" class="btn-counter" onclick="changeAttr('mente', 1)">+</button>
+                    </div>
+                  </div>
+
+                  <div class="attribute-row">
+                    <div class="attr-info">
+                      <span class="attr-icon">❤️</span>
+                      <span>Emoção</span>
+                      <span class="info-btn" onclick="openModal('Emoção', 'Mede a empatia, força espiritual e a ligação com sentimentos.')">?</span>
+                    </div>
+                    <div class="attr-controls">
+                      <button type="button" class="btn-counter" onclick="changeAttr('emocao', -1)">-</button>
+                      <span class="attr-value" id="val-emocao">0</span>
+                      <button type="button" class="btn-counter" onclick="changeAttr('emocao', 1)">+</button>
+                    </div>
+                  </div>
+
+                  <div class="attribute-row">
+                    <div class="attr-info">
+                      <span class="attr-icon">⚡</span>
+                      <span>Sorte</span>
+                      <span class="info-btn" onclick="openModal('Sorte', 'Reflete o quão favorecido pelos acasos do destino o personagem é.')">?</span>
+                    </div>
+                    <div class="attr-controls">
+                      <button type="button" class="btn-counter" onclick="changeAttr('sorte', -1)">-</button>
+                      <span class="attr-value" id="val-sorte">0</span>
+                      <button type="button" class="btn-counter" onclick="changeAttr('sorte', 1)">+</button>
+                    </div>
+                  </div>
+
+                  <div class="attribute-row">
+                    <div class="attr-info">
+                      <span class="attr-icon">📖</span>
+                      <span>Conhecimento</span>
+                      <span class="info-btn" onclick="openModal('Conhecimento', 'Representa seus estudos, memórias e sabedoria acumulada.')">?</span>
+                    </div>
+                    <div class="attr-controls">
+                      <button type="button" class="btn-counter" onclick="changeAttr('conhecimento', -1)">-</button>
+                      <span class="attr-value" id="val-conhecimento">0</span>
+                      <button type="button" class="btn-counter" onclick="changeAttr('conhecimento', 1)">+</button>
+                    </div>
+                  </div>
+
+                  <div class="attribute-row">
+                    <div class="attr-info">
+                      <span class="attr-icon">👁️</span>
+                      <span>Percepção</span>
+                      <span class="info-btn" onclick="openModal('Percepção', 'Sua capacidade de notar detalhes, perigos ocultos ou pistas no ambiente.')">?</span>
+                    </div>
+                    <div class="attr-controls">
+                      <button type="button" class="btn-counter" onclick="changeAttr('percepcao', -1)">-</button>
+                      <span class="attr-value" id="val-percepcao">0</span>
+                      <button type="button" class="btn-counter" onclick="changeAttr('percepcao', 1)">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SKILLS (5 MANDATORY SELECTION) -->
+              <div class="medieval-panel">
+                <h2 class="panel-title">
+                  <span>✦ Perícias</span>
+                </h2>
+                <div class="skills-counter">Selecionadas: <span id="skill-count">0</span> / 5</div>
+                
+                <div class="skills-grid" id="skills-container">
+                  <!-- Populated dynamically -->
+                </div>
+              </div>
+
+            </div>
+
+            <!-- HP & DETERMINATION -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div class="medieval-panel">
+                <h2 class="panel-title"><span>❤️ Vida</span> <span class="info-btn" onclick="openModal('Vida', 'Sua saúde física máxima é 32.')">?</span></h2>
+                <div style="display:flex; align-items:center; justify-content:space-between;">
+                  <label for="val-hp">Atual (Máx. 32):</label>
+                  <input type="number" id="val-hp" min="0" max="32" value="32" style="width: 80px; text-align:center;">
+                </div>
+              </div>
+
+              <div class="medieval-panel">
+                <h2 class="panel-title"><span>✦ Determinação</span> <span class="info-btn" onclick="openModal('Determinação', 'Sua força de vontade e combustível para habilidades. Máximo 25.')">?</span></h2>
+                <div style="display:flex; align-items:center; justify-content:space-between;">
+                  <label for="val-det">Atual (Máx. 25):</label>
+                  <input type="number" id="val-det" min="0" max="25" value="25" style="width: 80px; text-align:center;">
+                </div>
+              </div>
+            </div>
+
+            <!-- REQUISITO 2: SEPARAÇÃO DE HISTÓRIA E PERSONALIDADE -->
+            <div class="medieval-panel">
+              <h2 class="panel-title"><span>🖋️ História do Personagem</span></h2>
+              <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">
+                Conte um pouco sobre as origens do seu personagem, eventos marcantes do passado e como ele chegou até aqui.
+              </p>
+              <textarea id="char-history" rows="4" placeholder="Escreva a história do seu personagem..."></textarea>
+            </div>
+
+            <div class="medieval-panel">
+              <h2 class="panel-title"><span>🎭 Personalidade</span></h2>
+              <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">
+                Descreva livremente o comportamento, as virtudes, os defeitos, os valores, os hábitos e a maneira de agir do personagem.
+              </p>
+              <textarea id="char-personality" rows="4" placeholder="Ex: Prudente ao tomar decisões, porém leal aos seus companheiros até o fim. Mantém a calma mesmo sob pressão..."></textarea>
+            </div>
+
+            <!-- REQUISITOS 3 A 7: SEÇÃO DE HABILIDADES ESPECIAIS (5 ESPAÇOS FIXOS COM VALIDAÇÃO DE PD) -->
+            <div class="medieval-panel">
+              <h2 class="panel-title"><span>⚡ Habilidades Especiais</span></h2>
+              <p style="font-size: 13px; color: var(--gold-light); margin-bottom: 12px; line-height: 1.4;">
+                Registre até 5 habilidades especiais do seu personagem. Cada habilidade pode possuir um custo de Pontos de Determinação (PD) ou ser uma habilidade passiva, que não consome PD. Os custos das habilidades ativas devem ser diferentes entre si.
+              </p>
+
+              <div id="special-abilities-container">
+                <!-- 5 Fixed slots generated dynamically -->
+              </div>
+            </div>
+
+            <!-- EQUIPMENT & FEATURES -->
+            <div class="medieval-panel">
+              <h2 class="panel-title"><span>🎒 Equipamentos</span></h2>
+              <textarea id="char-equipment" rows="3" placeholder="Liste suas armas (ex: lança com alcance extra), armaduras e itens de viagem..."></textarea>
+            </div>
+
+            <div class="medieval-panel">
+              <h2 class="panel-title"><span>✨ Características Especiais</span></h2>
+              <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Afinidades com animais, marcas ancestrais ou características únicas de sobrevivência.</p>
+              <textarea id="char-features" rows="2" placeholder="Descreva características especiais..."></textarea>
+            </div>
+
+            <!-- SAVE BUTTON -->
+            <div style="margin-top: 25px;">
+              <button type="submit" class="btn-primary">✦ Salvar Ficha ✦</button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- COLUMN 3: RIGHT SIDEBAR VILLAGE BOND -->
+        <div class="right-sidebar">
+          <div class="medieval-panel">
+            <h2 class="panel-title"><span>🏠 Vínculo com a Vila</span></h2>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">Onde seu personagem está atualmente?</p>
+
+            <div style="display:flex; flex-direction:column; gap:8px; font-size:14px;">
+              <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                <input type="radio" name="village-bond" value="Já moro na vila" checked accent-color="var(--gold-accent)">
+                <span>Já moro na vila (Você cresceu ou vive aqui)</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                <input type="radio" name="village-bond" value="Estou chegando recentemente" accent-color="var(--gold-accent)">
+                <span>Estou chegando recentemente (Ainda conhecendo a vila)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW: ARCHIVE -->
+    <div id="view-archive" class="hidden">
+      <div class="medieval-panel">
+        <h2 class="panel-title"><span>📚 Arquivo de Personagens Salvos</span></h2>
+        <div id="archive-list" class="archive-grid">
+          <!-- Dynamically populated saved characters -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL FOR INSTRUCTIONS AND RULES -->
+  <div class="modal-overlay" id="info-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <h3 class="panel-title" id="modal-title">Título</h3>
+      <p id="modal-text" style="color: var(--text-parchment); margin-top: 10px; line-height: 1.6;"></p>
+    </div>
+  </div>
+
+  <script>
+    // LIST OF AVAILABLE PERÍCIAS
+    const SKILLS_LIST = [
+      { id: 'acrobacia', name: 'Acrobacia', desc: 'Permite desviar de obstáculos e realizar manobras ágeis.' },
+      { id: 'atletismo', name: 'Atletismo', desc: 'Testes de corrida, escalada, natação e força física continuada.' },
+      { id: 'luta', name: 'Luta', desc: 'Habilidade em combate corpo a corpo com ou sem armas.' },
+      { id: 'pontaria', name: 'Pontaria', desc: 'Precisão no uso de arcos, lanças de arremesso e armas à distância.' },
+      { id: 'furtividade', name: 'Furtividade', desc: 'Mover-se em silêncio e esconder-se nas sombras.' },
+      { id: 'investigacao', name: 'Investigação', desc: 'Encontrar pistas, deduzir eventos e examinar objetos.' },
+      { id: 'historia', name: 'História', desc: 'Conhecimento sobre o passado, lendas e civilizações antigas.' },
+      { id: 'medicina', name: 'Medicina', desc: 'Tratar ferimentos, estancar sangramentos e identificar venenos.' },
+      { id: 'ocultismo', name: 'Ocultismo', desc: 'Compreensão de rituais, energias misteriosas e o Threshold.' },
+      { id: 'sobrevivencia', name: 'Sobrevivência', desc: 'Rastrear presas, encontrar recursos e orientação na natureza.' },
+      { id: 'percepcao', name: 'Percepção', desc: 'Notar pequenos detalhes e emboscadas iminentes.' },
+      { id: 'natureza', name: 'Natureza', desc: 'Conhecimento de flora, fauna e clima regional.' }
+    ];
+
+    // ATTRIBUTES STATE
+    let attributes = {
+      fisico: 0,
+      mente: 0,
+      emocao: 0,
+      sorte: 0,
+      conhecimento: 0,
+      percepcao: 0
+    };
+    let remainingAttrPoints = 6;
+    let portraitBase64 = '';
+    let currentEditingId = null;
+
+    // INITIALIZATION
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSkills();
+      renderSpecialAbilitiesSlots();
+      loadArchive();
+    });
+
+    // NAVIGATION TABS
+    function switchTab(tab) {
+      document.getElementById('view-creator').classList.toggle('hidden', tab !== 'creator');
+      document.getElementById('view-archive').classList.toggle('hidden', tab !== 'archive');
+      document.getElementById('btn-tab-creator').classList.toggle('active', tab === 'creator');
+      document.getElementById('btn-tab-archive').classList.toggle('active', tab === 'archive');
+
+      if (tab === 'archive') {
+        loadArchive();
+      }
+    }
+
+    // IMAGE PORTRAIT HANDLING
+    function handleImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        portraitBase64 = event.target.result;
+        document.getElementById('portrait-img').src = portraitBase64;
+        document.getElementById('portrait-img').classList.remove('hidden');
+        document.getElementById('portrait-placeholder').classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeImage() {
+      portraitBase64 = '';
+      document.getElementById('portrait-input').value = '';
+      document.getElementById('portrait-img').src = '';
+      document.getElementById('portrait-img').classList.add('hidden');
+      document.getElementById('portrait-placeholder').classList.remove('hidden');
+    }
+
+    // ATTRIBUTE CONTROLLER
+    function changeAttr(attr, delta) {
+      if (delta > 0 && remainingAttrPoints <= 0) return;
+      if (delta < 0 && attributes[attr] <= 0) return;
+
+      attributes[attr] += delta;
+      remainingAttrPoints -= delta;
+
+      document.getElementById(`val-${attr}`).innerText = attributes[attr];
+      document.getElementById('attr-points-left').innerText = remainingAttrPoints;
+    }
+
+    // SKILLS CONTROLLER (ENFORCES EXACTLY 5 SKILLS)
+    function renderSkills() {
+      const container = document.getElementById('skills-container');
+      container.innerHTML = '';
+
+      SKILLS_LIST.forEach(skill => {
+        const item = document.createElement('div');
+        item.className = 'skill-item';
+        item.innerHTML = `
+          <input type="checkbox" id="skill-${skill.id}" value="${skill.name}" onchange="onSkillToggle()">
+          <label for="skill-${skill.id}" style="margin:0; font-size:14px; cursor:pointer;">${skill.name}</label>
+          <span class="info-btn" onclick="openModal('${skill.name}', '${skill.desc}')">?</span>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function onSkillToggle() {
+      const checkedBoxes = document.querySelectorAll('#skills-container input[type="checkbox"]:checked');
+      const count = checkedBoxes.length;
+      document.getElementById('skill-count').innerText = count;
+
+      const allBoxes = document.querySelectorAll('#skills-container input[type="checkbox"]');
+      allBoxes.forEach(box => {
+        if (!box.checked) {
+          box.disabled = (count >= 5);
+        }
+      });
+    }
+
+    // SPECIAL ABILITIES RENDERER & VALIDATION (REQUISITOS 3 A 7)
+    function renderSpecialAbilitiesSlots() {
+      const container = document.getElementById('special-abilities-container');
+      container.innerHTML = '';
+
+      for (let i = 1; i <= 5; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'special-ability-card';
+        slot.innerHTML = `
+          <div class="ability-header">
+            <div>
+              <label for="ability-name-${i}">Habilidade #${i} - Nome:</label>
+              <input type="text" id="ability-name-${i}" placeholder="Ex: Golpe Devastador">
+            </div>
+            <div>
+              <label for="ability-cost-${i}">Custo de PD:</label>
+              <select id="ability-cost-${i}" class="ability-cost-select" onchange="validateAbilityCosts()">
+                <option value="Passiva (0 PD)">Passiva (0 PD)</option>
+                <option value="2 PD">2 PD</option>
+                <option value="3 PD">3 PD</option>
+                <option value="4 PD">4 PD</option>
+                <option value="5 PD">5 PD</option>
+                <option value="6 PD">6 PD</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <textarea id="ability-desc-${i}" rows="2" placeholder="Descreva os efeitos e mecânicas desta habilidade..."></textarea>
+          </div>
+        `;
+        container.appendChild(slot);
+      }
+    }
+
+    // VALIDATES UNIQUE ACTIVE PD COSTS ACROSS THE 5 SLOTS
+    function validateAbilityCosts() {
+      const selects = document.querySelectorAll('.ability-cost-select');
+      const selectedActiveCosts = [];
+
+      selects.forEach(select => {
+        const val = select.value;
+        if (val !== 'Passiva (0 PD)' && val !== '') {
+          if (selectedActiveCosts.includes(val)) {
+            openModal('Custo Repetido', `O custo de <strong>${val}</strong> já está sendo utilizado por outra habilidade ativa! Cada habilidade ativa deve possuir um custo de PD diferente.`);
+            select.value = 'Passiva (0 PD)';
+          } else {
+            selectedActiveCosts.push(val);
+          }
+        }
+      });
+    }
+
+    // MODAL WINDOW
+    function openModal(title, text) {
+      document.getElementById('modal-title').innerHTML = `✦ ${title}`;
+      document.getElementById('modal-text').innerHTML = text;
+      document.getElementById('info-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('info-modal').classList.remove('active');
+    }
+
+    // SAVE CHARACTER TO LOCALSTORAGE
+    function saveCharacter(event) {
+      event.preventDefault();
+
+      // VALIDATE EXACTLY 5 SKILLS
+      const checkedSkills = Array.from(document.querySelectorAll('#skills-container input[type="checkbox"]:checked')).map(cb => cb.value);
+      if (checkedSkills.length !== 5) {
+        openModal('Atenção', 'Você deve selecionar <strong>EXATAMENTE 5 PERÍCIAS</strong> antes de salvar a ficha do seu personagem.');
+        return;
+      }
+
+      // VALIDATE AGE
+      const ageVal = document.getElementById('char-age').value;
+      if (!ageVal || ageVal <= 0) {
+        openModal('Idade Obrigatória', 'Por favor, informe uma idade válida para o seu personagem.');
+        return;
+      }
+
+      // COLLECT SPECIAL ABILITIES
+      const specialAbilities = [];
+      for (let i = 1; i <= 5; i++) {
+        const name = document.getElementById(`ability-name-${i}`).value.trim();
+        const cost = document.getElementById(`ability-cost-${i}`).value;
+        const desc = document.getElementById(`ability-desc-${i}`).value.trim();
+
+        if (name || desc) {
+          if (!name || !desc) {
+            openModal('Habilidade Incompleta', `Por favor, preencha o Nome e a Descrição para a Habilidade #${i}.`);
+            return;
+          }
+          specialAbilities.push({ name, cost, desc });
+        }
+      }
+
+      // COLLECT FULL CHARACTER DATA OBJECT
+      const charData = {
+        id: currentEditingId ? currentEditingId : 'char_' + Date.now(),
+        name: document.getElementById('char-name').value,
+        title: document.getElementById('char-title').value,
+        age: ageVal,
+        player: document.getElementById('player-name').value,
+        level: document.getElementById('char-level').value,
+        origin: document.getElementById('char-origin').value,
+        occupation: document.getElementById('char-occupation').value,
+        portrait: portraitBase64,
+        attributes: { ...attributes },
+        skills: checkedSkills,
+        hp: document.getElementById('val-hp').value,
+        det: document.getElementById('val-det').value,
+        history: document.getElementById('char-history').value,
+        personality: document.getElementById('char-personality').value,
+        abilities: specialAbilities,
+        equipment: document.getElementById('char-equipment').value,
+        features: document.getElementById('char-features').value,
+        villageBond: document.querySelector('input[name="village-bond"]:checked').value,
+        updatedAt: new Date().toLocaleDateString('pt-BR')
+      };
+
+      // STORAGE INTERACTION
+      let archive = JSON.parse(localStorage.getItem('threshold_characters') || '[]');
+      if (currentEditingId) {
+        archive = archive.map(c => c.id === currentEditingId ? charData : c);
+      } else {
+        archive.push(charData);
+      }
+
+      localStorage.setItem('threshold_characters', JSON.stringify(archive));
+
+      openModal('Ficha Salva!', `A ficha de <strong>${charData.name}</strong> foi gravada com sucesso nos registros do Threshold.`);
+      
+      resetForm();
+      switchTab('archive');
+    }
+
+    // RESET FORM TO INITIAL STATE
+    function resetForm() {
+      currentEditingId = null;
+      document.getElementById('character-form').reset();
+      removeImage();
+      
+      attributes = { fisico: 0, mente: 0, emocao: 0, sorte: 0, conhecimento: 0, percepcao: 0 };
+      remainingAttrPoints = 6;
+      Object.keys(attributes).forEach(attr => {
+        document.getElementById(`val-${attr}`).innerText = '0';
+      });
+      document.getElementById('attr-points-left').innerText = '6';
+
+      renderSkills();
+      renderSpecialAbilitiesSlots();
+      onSkillToggle();
+    }
+
+    // ARCHIVE SYSTEM
+    function loadArchive() {
+      const container = document.getElementById('archive-list');
+      const archive = JSON.parse(localStorage.getItem('threshold_characters') || '[]');
+
+      if (archive.length === 0) {
+        container.innerHTML = `<p style="color:var(--text-muted); grid-column: 1/-1;">Nenhum personagem registrado até o momento.</p>`;
+        return;
+      }
+
+      container.innerHTML = archive.map(char => `
+        <div class="char-card">
+          <img src="${char.portrait || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="85" height="105" fill="%234a3b2c"><rect width="100%" height="100%"/></svg>'}" class="char-card-portrait" alt="Retrato">
+          <div class="char-card-info">
+            <div class="char-card-name">${char.name} ${char.title ? `<small style="font-size:11px; font-weight:normal; color:var(--text-muted);">(${char.title})</small>` : ''}</div>
+            <div class="char-card-details">
+              <strong>Idade:</strong> ${char.age} anos | <strong>Nv:</strong> ${char.level}<br>
+              <strong>Ocupação:</strong> ${char.occupation}<br>
+              <strong>Jogador:</strong> ${char.player}
+            </div>
+            <div class="char-card-actions">
+              <button type="button" class="btn-secondary" onclick="viewCharacter('${char.id}')">Visualizar</button>
+              <button type="button" class="btn-secondary" onclick="editCharacter('${char.id}')">Editar</button>
+              <button type="button" class="btn-secondary" style="border-color:#8b2626;" onclick="deleteCharacter('${char.id}')">Excluir</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function editCharacter(id) {
+      const archive = JSON.parse(localStorage.getItem('threshold_characters') || '[]');
+      const char = archive.find(c => c.id === id);
+      if (!char) return;
+
+      currentEditingId = char.id;
+      document.getElementById('char-name').value = char.name || '';
+      document.getElementById('char-title').value = char.title || '';
+      document.getElementById('char-age').value = char.age || '';
+      document.getElementById('player-name').value = char.player || '';
+      document.getElementById('char-level').value = char.level || 1;
+      document.getElementById('char-origin').value = char.origin || 'Vila das Sombras';
+      document.getElementById('char-occupation').value = char.occupation || 'Ajudante Comunitário';
+      document.getElementById('val-hp').value = char.hp || 32;
+      document.getElementById('val-det').value = char.det || 25;
+      document.getElementById('char-history').value = char.history || '';
+      document.getElementById('char-personality').value = char.personality || '';
+      document.getElementById('char-equipment').value = char.equipment || '';
+      document.getElementById('char-features').value = char.features || '';
+
+      if (char.portrait) {
+        portraitBase64 = char.portrait;
+        document.getElementById('portrait-img').src = char.portrait;
+        document.getElementById('portrait-img').classList.remove('hidden');
+        document.getElementById('portrait-placeholder').classList.add('hidden');
+      } else {
+        removeImage();
+      }
+
+      // LOAD ATTRIBUTES
+      if (char.attributes) {
+        attributes = { ...char.attributes };
+        let spent = 0;
+        Object.keys(attributes).forEach(attr => {
+          spent += attributes[attr];
+          document.getElementById(`val-${attr}`).innerText = attributes[attr];
+        });
+        remainingAttrPoints = 6 - spent;
+        document.getElementById('attr-points-left').innerText = remainingAttrPoints;
+      }
+
+      // LOAD SKILLS
+      renderSkills();
+      if (char.skills && Array.isArray(char.skills)) {
+        char.skills.forEach(skillName => {
+          const cb = Array.from(document.querySelectorAll('#skills-container input[type="checkbox"]')).find(c => c.value === skillName);
+          if (cb) cb.checked = true;
+        });
+      }
+      onSkillToggle();
+
+      // LOAD ABILITIES
+      renderSpecialAbilitiesSlots();
+      if (char.abilities && Array.isArray(char.abilities)) {
+        char.abilities.forEach((ab, idx) => {
+          const slotIdx = idx + 1;
+          if (slotIdx <= 5) {
+            document.getElementById(`ability-name-${slotIdx}`).value = ab.name || '';
+            document.getElementById(`ability-cost-${slotIdx}`).value = ab.cost || 'Passiva (0 PD)';
+            document.getElementById(`ability-desc-${slotIdx}`).value = ab.desc || '';
+          }
+        });
+      }
+
+      switchTab('creator');
+    }
+
+    function viewCharacter(id) {
+      const archive = JSON.parse(localStorage.getItem('threshold_characters') || '[]');
+      const char = archive.find(c => c.id === id);
+      if (!char) return;
+
+      const abilitiesHTML = (char.abilities && char.abilities.length) 
+        ? char.abilities.map(a => `<li><strong>${a.name}</strong> (${a.cost}): ${a.desc}</li>`).join('')
+        : '<li>Nenhuma habilidade especial cadastrada</li>';
+
+      openModal(
+        `${char.name} ${char.title ? `(${char.title})` : ''}`,
+        `
+        <div style="text-align:center; margin-bottom:12px;">
+          ${char.portrait ? `<img src="${char.portrait}" style="max-width:140px; border:1px solid var(--gold-accent);">` : ''}
+        </div>
+        <p><strong>Idade:</strong> ${char.age} anos | <strong>Jogador:</strong> ${char.player}</p>
+        <p><strong>Origem:</strong> ${char.origin} | <strong>Ocupação:</strong> ${char.occupation}</p>
+        <p><strong>Vida:</strong> ${char.hp}/32 | <strong>Determinação:</strong> ${char.det}/25</p>
+        <hr style="border-color:var(--panel-border); margin:10px 0;">
+        <p><strong>Perícias (5):</strong> ${char.skills.join(', ')}</p>
+        <hr style="border-color:var(--panel-border); margin:10px 0;">
+        <p><strong>Personalidade:</strong><br>${char.personality || 'Não informada.'}</p>
+        <hr style="border-color:var(--panel-border); margin:10px 0;">
+        <p><strong>História:</strong><br>${char.history || 'Não informada.'}</p>
+        <hr style="border-color:var(--panel-border); margin:10px 0;">
+        <p><strong>Habilidades Especiais:</strong></p>
+        <ul style="padding-left:18px; margin-top:4px;">${abilitiesHTML}</ul>
+        `
+      );
+    }
+
+    function deleteCharacter(id) {
+      if (confirm('Tem certeza de que deseja remover esta ficha permanentemente dos registros?')) {
+        let archive = JSON.parse(localStorage.getItem('threshold_characters') || '[]');
+        archive = archive.filter(c => c.id !== id);
+        localStorage.setItem('threshold_characters', JSON.stringify(archive));
+        loadArchive();
+      }
+    }
+  </script>
+</body>
+</html>
